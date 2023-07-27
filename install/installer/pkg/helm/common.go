@@ -6,13 +6,25 @@ package helm
 
 import (
 	"fmt"
-	"github.com/gitpod-io/gitpod/installer/pkg/common"
 	"os"
+	"strings"
+
+	"github.com/gitpod-io/gitpod/installer/pkg/common"
 )
 
 // KeyValue ensure that a key/value pair is correctly formatted for Values
 func KeyValue(key string, value string) string {
 	return fmt.Sprintf("%s=%s", key, value)
+}
+
+// KeyValueArray ensure that a key/value pair is correctly formatted for Values
+func KeyValueArray(key string, envs map[string]string) string {
+	var envVarList []string
+	for n, v := range envs {
+		envVar := KeyValue(n, v)
+		envVarList = append(envVarList, envVar)
+	}
+	return KeyValue(key, strings.Join(envVarList, ","))
 }
 
 // KeyFileValue ensure that a key/value pair is correctly formatted for FileValues
