@@ -269,6 +269,10 @@ jobs:
           fi
 
           exit $RESULT
+      - name: Collect docker logs on failure
+        if: "!success()"
+        run: |
+          docker logs "${{ job.services.mysl.id }}"
       - name: Tag the release
         if: github.ref == 'refs/heads/main'
         run: |
