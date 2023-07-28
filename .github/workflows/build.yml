@@ -272,7 +272,7 @@ jobs:
       - name: Collect docker logs on failure
         if: "!success()"
         run: |
-          docker logs "${{ job.services.mysl.id }}"
+          docker logs "${{ job.services.mysql.id }}"
       - name: Tag the release
         if: github.ref == 'refs/heads/main'
         run: |
