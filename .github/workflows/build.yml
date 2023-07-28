@@ -148,10 +148,10 @@ jobs:
         image: bitnami/mysql:8.0.33-debian-11-r24
         env:
           MYSQL_ROOT_PASSWORD: test
-          MYSQL_TCP_PORT: 23306
+          #MYSQL_TCP_PORT: 23306 gpl: bitnami does not honor this
           MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
         ports:
-          - 23306:23306
+          - 23306:3306
     container:
       image: eu.gcr.io/gitpod-core-dev/dev/dev-environment:aledbf-oci-tool-gha.14121
       env:
