@@ -157,6 +157,8 @@ jobs:
       env:
         DB_HOST: "mysql"
         DB_PORT: "23306"
+        # GitHub action + MySQL 8.0 need longer to initialize
+        DB_RETRIES: 5
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-environment
