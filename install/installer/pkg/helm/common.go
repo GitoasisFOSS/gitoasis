@@ -17,14 +17,10 @@ func KeyValue(key string, value string) string {
 	return fmt.Sprintf("%s=%s", key, value)
 }
 
-// KeyValueArray ensure that a key/value pair is correctly formatted for Values
-func KeyValueArray(key string, envs map[string]string) string {
-	var envVarList []string
-	for n, v := range envs {
-		envVar := KeyValue(n, v)
-		envVarList = append(envVarList, envVar)
-	}
-	return KeyValue(key, strings.Join(envVarList, ","))
+// KeyValueArray ensure that a key/value pair is correctly formatted for Arrays
+func KeyValueArray(key string, arr []string) string {
+	// Helm array nomenclature
+	return KeyValue(key, fmt.Sprintf("{%s}", strings.Join(arr, ",")))
 }
 
 // KeyFileValue ensure that a key/value pair is correctly formatted for FileValues
