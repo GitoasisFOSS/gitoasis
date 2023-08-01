@@ -155,7 +155,7 @@ jobs:
     container:
       image: eu.gcr.io/gitpod-core-dev/dev/dev-environment:aledbf-oci-tool-gha.14121
       env:
-        DB_HOST: "127.0.0.1"
+        DB_HOST: "mysql"
         DB_PORT: "23306"
         # GitHub action + MySQL 8.0 need longer to initialize
         DB_RETRIES: 5
@@ -235,6 +235,11 @@ jobs:
           [[ "$PR_NO_CACHE" = "true" ]] && CACHE="none"       || CACHE="remote"
           [[ "$PR_NO_TEST"  = "true" ]] && TEST="--dont-test" || TEST=""
           [[ "${PUBLISH_TO_NPM}" = 'true' ]] && NPM_PUBLISH_TRIGGER=$(date +%s%3N) || NPM_PUBLISH_TRIGGER="false"
+
+          while true; do
+            echo "sleeping forever";
+            sleep 5;
+          done
 
           RESULT=0
           set -x
