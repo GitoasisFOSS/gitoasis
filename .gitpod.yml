@@ -1,5 +1,5 @@
 image: eu.gcr.io/gitpod-core-dev/dev/dev-environment:aledbf-oci-tool-gha.14121
-workspaceLocation: gitpod/gitpod-ws.code-workspace
+#workspaceLocation: gitpod/gitpod-ws.code-workspace
 checkoutLocation: gitpod
 ports:
     - port: 1337
