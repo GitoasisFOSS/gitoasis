@@ -21,7 +21,6 @@ import {
 import { log } from "@gitpod/gitpod-protocol/lib/util/logging";
 import { TraceContext } from "@gitpod/gitpod-protocol/lib/util/tracing";
 import { getCommitInfo, HostContextProvider } from "../auth/host-context-provider";
-import { WorkspaceFactory } from "../workspace/workspace-factory";
 import { ConfigProvider } from "../workspace/config-provider";
 import { WorkspaceStarter } from "../workspace/workspace-starter";
 import { Config } from "../config";
@@ -38,6 +37,7 @@ import { ErrorCodes, ApplicationError } from "@gitpod/gitpod-protocol/lib/messag
 import { UserAuthentication } from "../user/user-authentication";
 import { EntitlementService, MayStartWorkspaceResult } from "../billing/entitlement-service";
 import { EnvVarService } from "../workspace/env-var-service";
+import { WorkspaceService } from "../workspace/workspace-service";
 
 export class WorkspaceRunningError extends Error {
     constructor(msg: string, public instance: WorkspaceInstance) {
@@ -56,7 +56,7 @@ export interface StartPrebuildParams {
 @injectable()
 export class PrebuildManager {
     @inject(TracedWorkspaceDB) protected readonly workspaceDB: DBWithTracing<WorkspaceDB>;
-    @inject(WorkspaceFactory) protected readonly workspaceFactory: WorkspaceFactory;
+    @inject(WorkspaceService) protected readonly workspaceService: WorkspaceService;
     @inject(WorkspaceStarter) protected readonly workspaceStarter: WorkspaceStarter;
     @inject(HostContextProvider) protected readonly hostContextProvider: HostContextProvider;
     @inject(ConfigProvider) protected readonly configProvider: ConfigProvider;
@@ -224,7 +224,7 @@ export class PrebuildManager {
                 }
             }
 
-            const workspace = await this.workspaceFactory.createForContext(
+            const workspace = await this.workspaceService.createWorkspace(
                 { span },
                 user,
                 project.teamId,
