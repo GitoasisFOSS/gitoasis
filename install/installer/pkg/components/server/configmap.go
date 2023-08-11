@@ -212,8 +212,7 @@ func configmap(ctx *common.RenderContext) ([]runtime.Object, error) {
 			MaxAgeMs: 259200000,
 			Secret:   sessionSecret,
 		},
-		DefinitelyGpDisabled: ctx.Config.DisableDefinitelyGP,
-		GitHubApp:            githubApp,
+		GitHubApp: githubApp,
 		WorkspaceGarbageCollection: WorkspaceGarbageCollection{
 			Disabled:                   disableWsGarbageCollection,
 			IntervalSeconds:            1 * 60 * 60, // 1 hour

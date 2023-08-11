@@ -11,7 +11,6 @@ containerRegistry:
   privateBaseImageAllowList: []
 database:
   inCluster: true
-disableDefinitelyGp: true
 domain: ""
 kind: Full
 metadata:

@@ -75,7 +75,6 @@ func (v version) Defaults(in interface{}) error {
 	cfg.Workspace.Runtime.ContainerDRuntimeDir = containerd.ContainerdLocationDefault.String()
 	cfg.Workspace.MaxLifetime = util.Duration(36 * time.Hour)
 	cfg.OpenVSX.URL = defaultOpenVSXURL
-	cfg.DisableDefinitelyGP = true
 
 	return nil
 }
@@ -142,8 +141,6 @@ type Config struct {
 	BlockNewUsers BlockNewUsers `json:"blockNewUsers"`
 
 	SSHGatewayHostKey *ObjectRef `json:"sshGatewayHostKey,omitempty"`
-
-	DisableDefinitelyGP bool `json:"disableDefinitelyGp"`
 
 	CustomCACert *ObjectRef `json:"customCACert,omitempty"`
 
